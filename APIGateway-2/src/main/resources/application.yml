@@ -1,0 +1,23 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: service1
+          uri: http://localhost:8081
+          predicates:
+            - Path=/service1/**
+        - id: service2
+          uri: http://localhost:8082
+          predicates:
+            - Path=/service2/**
+  zipkin:
+    base-url: http://localhost:9411
+    enabled: true
+  tracing:
+    sampling:
+      probability: 1.0
